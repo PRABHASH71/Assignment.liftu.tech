@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:internshipapp/Models/ProductModel.dart';
 
 class CheckPage extends StatefulWidget {
-  final Map? newmap;
+  final ProductModel? newmap;
 
   const CheckPage({this.newmap, super.key});
 
@@ -12,9 +13,8 @@ class CheckPage extends StatefulWidget {
 class _CheckPageState extends State<CheckPage> {
   int qty = 1;
   bool fav = false;
-
-  List fun() {
-    return widget.newmap!['images'];
+  String fun(int index) {
+    return widget.newmap!.images![index];
   }
 
   @override
@@ -37,8 +37,8 @@ class _CheckPageState extends State<CheckPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                        flex: 5,
+                    Flexible(
+                        fit: FlexFit.loose,
                         child: ListView.builder(
                             itemCount: 2,
                             scrollDirection: Axis.horizontal,
@@ -49,7 +49,7 @@ class _CheckPageState extends State<CheckPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          widget.newmap!['title'].toString(),
+                          widget.newmap!.title.toString(),
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -74,7 +74,7 @@ class _CheckPageState extends State<CheckPage> {
                     SizedBox(
                       height: 20,
                       child: Text(
-                        "\₹" + widget.newmap!['price'].toString(),
+                        "\₹" + widget.newmap!.price.toString(),
                         style: TextStyle(
                             color: Colors.blue,
                             fontSize: 18,
@@ -85,7 +85,7 @@ class _CheckPageState extends State<CheckPage> {
                       height: 10,
                     ),
                     Text(
-                      widget.newmap!['description'].toString(),
+                      widget.newmap!.description.toString(),
                       style: TextStyle(
                         fontSize: 14,
                         color: const Color.fromARGB(255, 41, 41, 41),
@@ -166,8 +166,9 @@ class _CheckPageState extends State<CheckPage> {
         child: Column(
           children: [
             Image.network(
-              fun()[index1].toString(),
+              fun(index1).toString(),
               height: 350,
+              width: 400,
             ),
             SizedBox(
               height: 20,

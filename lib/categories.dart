@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:internshipapp/CheckoutPage.dart';
+import 'package:internshipapp/Models/ProductModel.dart';
 
 class Categories extends StatefulWidget {
-  final List? categorielist;
+  final List<ProductModel>? categorielist;
 
   Categories({this.categorielist});
 
@@ -11,17 +12,15 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  List fun(int y) {
-    return widget.categorielist![y]['images'];
-  }
-
   void check(int id) {
-    Map obj = widget.categorielist![id];
-
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => CheckPage(
-              newmap: obj,
+              newmap: widget.categorielist![id],
             )));
+  }
+
+  String fun(int i) {
+    return widget.categorielist![i].images![0];
   }
 
   @override
@@ -59,12 +58,12 @@ class _CategoriesState extends State<Categories> {
                           ),
                           child: Column(
                             children: [
-                              Image.network(fun(index)[0].toString()),
+                              Image.network(fun(index).toString()),
                               SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                widget.categorielist![index]["title"],
+                                widget.categorielist![index].title.toString(),
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               )
                             ],
